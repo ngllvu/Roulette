@@ -72,7 +72,7 @@ void Roulette::regis_log(char auth){
             forgot();
             break;
         case '4':
-            RegisterMenu();
+            Menu();
             break;
     }
 }
@@ -102,12 +102,12 @@ void Roulette::login(){
     if (count == 1)
     {
         std::cout << userId << "\n Your LOGIN is successfull /n Thanks for logging in ! \n";
-        RegisterMenu();
+        Menu();
     }
     else
     {
         std::cout << "\n LOGIN ERROR \n Please check your username and password\n";
-        RegisterMenu();
+        login();
     }
 }
 void Roulette::registation(){
@@ -122,6 +122,7 @@ void Roulette::registation(){
     f1 << ruserId << " " << rpassword << std::endl;
     system("cls");
     std::cout << "\n\t\t\t Registrationis succesfull! \n";
+    Menu();
 }
 void Roulette::forgot(){
     int option;
@@ -140,7 +141,7 @@ void Roulette::forgot(){
         std::cout << "\n\t\t\t Enter the username which you remembered :";
         std::cin >> suserId;
 
-        ifstream f2("records.txt");
+        ifstream f2("data.txt");
         while (f2 >> sId >> spass)
         {
             if (sId == suserId)
@@ -163,7 +164,7 @@ void Roulette::forgot(){
     }
     case 2:
     {
-        exit(0);
+        RegisterMenu();
     }
     default:
         std::cout << "\t\t\t Wrong choice ! Please try again " << std::endl;
@@ -321,38 +322,35 @@ void Roulette::saveInformation(){
         {
             printInformation(name, saved);
             if (key == 27)
-            {
-
-                Menu();
                 break;
             }
         }
     }
-}
+
 void Roulette::printInformation(string name, bool saved){
     double money;
     clearSystem();
-    cout << printColor("=========================================", 37) << endl;
-    cout << setw(12) << "" << printColor("SAVE ACHIEVEMENTS", 36) << endl;
-    cout << printColor("=========================================", 37) << endl;
-    cout << endl;
-    cout << setw(2) << ""
+    std::cout << printColor("=========================================", 37) << std::endl;
+    std::cout << setw(12) << "" << printColor("SAVE INFORMATION", 36) << std::endl;
+    std::cout << printColor("=========================================", 37) << std::endl;
+    std::cout << std::endl;
+    std::cout << setw(2) << ""
          << "Enter your name: " << name << "_";
-    cout << endl;
-    cout << setw(2) << ""
+    std::cout << std::endl;
+    std::cout << setw(2) << ""
          << "Your Money: " << money;
 
-    cout << endl;
-    cout << endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
     if (!saved)
     {
-        cout << setw(2) << "" << printColor("Press [ENTER] to save", 36) << endl;
-        cout << setw(2) << "" << printColor("Press [ESC] to back the game", 33) << endl;
+        std::cout << setw(2) << "" << printColor("Press [ENTER] to save", 36) << std::endl;
+        std::cout << setw(2) << "" << printColor("Press [ESC] to back the game", 33) << std::endl;
     }
     else
     {
-        cout << setw(2) << "" << printColor("SAVED", 32) << endl;
-        cout << setw(2) << "" << printColor("Press [ESC] go to menu", 32) << endl;
+        std::cout << setw(2) << "" << printColor("SAVED", 32) << std::endl;
+        std::cout << setw(2) << "" << printColor("Press [ESC] go to menu", 32) << std::endl;
     }
 }
 
@@ -364,9 +362,9 @@ void Roulette::rouletteTable(int num, bool isResult){
     int colorTrue = 32;
     int colorFocus = 34;
 
-    std::cout << endl;
-    std::cout << endl;
-    std::cout << printColor("=========================================", colorBorder) << endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << printColor("=========================================", colorBorder) << std::endl;
 
     for (int i = 0; i < N; i++)
     {
@@ -430,16 +428,16 @@ void Roulette::rouletteTable(int num, bool isResult){
         }
         if (h % 3 == 0)
         {
-            std::cout << endl;
+            std::cout << std::endl;
             std::cout << printColor("===========================================", colorBorder) << endl;
         }
         else
         {
-            std::cout << endl;
+            std::cout << std::endl;
         }
     }
-    std::cout << endl;
-    std::cout << endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
 }
 void Roulette::creatTable(){
     int sqrtN = sqrt(N);
