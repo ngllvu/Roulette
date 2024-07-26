@@ -490,11 +490,6 @@ void Roulette::Bet(){
     int bet, deposit;
     std::cout << "Enter your bet: ";
     std::cin >> bet;
-    if(){
-        deposit += bet*2;
-    }
-    else
-        deposit -= bet*2;
 }
 void Roulette::mainGame(int N){
     clearSystem();
