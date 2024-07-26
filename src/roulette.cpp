@@ -2,29 +2,10 @@
 #include<iostream>
 #include<stdc++.h>
 
-/*void Roulette::Display(){
-    std::cout<<"\n=======================================================================================================================================================================";
-    std::cout<<"\n=======================================================================================================================================================================";
-    std::cout<<"\n";
-    std::cout<<"\n      RRRRRRRRRRRR           RRRRRRRR      UUU          UUU   LLLL            EEEEEEEEEEEEE   TTTTTTTTTTTTTTTTTTTTT   TTTTTTTTTTTTTTTTTTTTTT   EEEEEEEEEEEEE";
-    std::cout<<"\n      RRR         RRR      RRR      RRR    UUU          UUU   LLLL            EEEEEEEEEEEEE   TTTTTTTTTTTTTTTTTTTTT   TTTTTTTTTTTTTTTTTTTTTT   EEEEEEEEEEEEE";
-    std::cout<<"\n      RRR          RRR    RRR        RRR   UUU          UUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR          RRR    RRR        RRR   UUU          UUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR         RRR     RRR        RRR   UUU          UUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR         RRR     RRR        RRR   UUU          UUU   LLLL            EEEEEEEEEEEE            TTTT                     TTTT            EEEEEEEEEEEE";
-    std::cout<<"\n      RRRRRRRRRRRR        RRR        RRR   UUU          UUU   LLLL            EEEEEEEEEEEE            TTTT                     TTTT            EEEEEEEEEEEE";
-    std::cout<<"\n      RRR         RR      RRR        RRR   UUU          UUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR          RRR    RRR        RRR   UUU          UUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR          RRR    RRR        RRR   UUUU        UUUU   LLLL            EEE                     TTTT                     TTTT            EEE";
-    std::cout<<"\n      RRR          RRR     RRR      RRR     UUUUUUUUUUUUUU    LLLLLLLLLLLLLL  EEEEEEEEEEEEE           TTTT                     TTTT            EEEEEEEEEEEEE";
-    std::cout<<"\n      RRR          RRR       RRRRRRRR        UUUUUUUUUUUU     LLLLLLLLLLLLLL  EEEEEEEEEEEEE           TTTT                     TTTT            EEEEEEEEEEEEE";
-    std::cout<<"\n";
-    std::cout<<"\n=======================================================================================================================================================================";
-    std::cout<<"\n=======================================================================================================================================================================";
-}*/
+//ham thiet lap
 Roulette::Roulette(int N){
     this->N = N;
-    Menu();
+    RegisterMenu();
 }
 Roulette::~Roulette(){
     for(int i = 0; i < N; i++){
@@ -37,22 +18,24 @@ Roulette::~Roulette(){
     delete[] highLights;
 }
 
-
+//menu
 void Roulette::RegisterMenu(){
     int auth;
     while(true){
         clearSystem();
-        std::cout << "\t\t\t_________________________________________\n\n\n";
-        std::cout << "\t\t\t          welcome to the login page      \n\n\n";
-        std::cout << "\t\t\t_________        MENU        ____________\n\n\n";
-        std::cout << "                                                 \n\n\n";
-        std::cout << "\t|  Press 1 to LOGIN                     |" << std::endl;
-        std::cout << "\t|  Press 2 to REGISTER                  |" << std::endl;
-        std::cout << "\t|  Press 3 if you forgot your PASSWORD  |" << std::endl;
-        std::cout << "\t|  Press 4 to go back to Menu  |" << std::endl;
+        std::cout << printColor("=========================================", 37) << std::endl;
+        std::cout << setw(35) << right << printColor("ROULETTE", 36) << std::endl;
+        std::cout << printColor("=========================================", 37) << std::endl;
+        std::cout << endl;
+        std::cout << printColor("[1] REGISTER", 32) << std::endl;
+        std::cout << printColor("[2] LOGIN", 32) << std::endl;
+        std::cout << printColor("[3] FORGOT PASSWORD", 36) << std::endl;
+        std::cout << printColor("[4] INSTRUCTIONS", 33) << std::endl;
+        std::cout << printColor("[5] EXIT", 31) << std::endl;
+        std::cout << std::endl;
         std::cout << std::endl;
         char select = getch();
-        if (!(select < '1' || select > '4'))
+        if (!(select < '1' || select > '5'))
         {
             auth = select;
             break;
@@ -63,17 +46,19 @@ void Roulette::RegisterMenu(){
 void Roulette::regis_log(char auth){
     switch(auth){
         case '1':
-            login();
+            registation();
             break;
         case '2':
-            registation();
+            login();
             break;
         case '3':
             forgot();
             break;
         case '4':
-            Menu();
+            Rules("main");
             break;
+        case '5':
+            exit(0);
     }
 }
 
@@ -128,8 +113,8 @@ void Roulette::forgot(){
     int option;
     system("cls");
     cout << "\t\t\t You forgot the password? No Worries \n";
-    cout << "Press 1 to search your id by username " << endl;
-    cout << "press 2 to go to the main menu " << endl;
+    cout << "Press 1 to search your id by username " << std::endl;
+    cout << "press 2 to go to the main menu " << std::endl;
     cout << "\t\t\t Enter your choice :";
     cin >> option;
     switch (option)
@@ -185,17 +170,16 @@ void Roulette::Menu(){
     while (true)
     {
         clearSystem();
-        std::cout << printColor("=========================================", 37) << endl;
-        std::cout << setw(35) << right << printColor("ROULETTE", 36) << endl;
-        std::cout << printColor("=========================================", 37) << endl;
+        std::cout << printColor("=========================================", 37) << std::endl;
+        std::cout << setw(35) << right << printColor("ROULETTE", 36) << std::endl;
+        std::cout << printColor("=========================================", 37) << std::endl;
         std::cout << endl;
-        std::cout << printColor("[1] REGISTER / LOGIN", 32) << endl;
-        std::cout << printColor("[2] PLAY", 36) << endl;
-        std::cout << printColor("[3] INSTRUCTIONS", 33) << endl;
-        std::cout << printColor("[4] EXIT", 31) << endl;
-        std::cout << endl;
+        std::cout << printColor("[1] PLAY", 36) << std::endl;
+        std::cout << printColor("[2] PROFILE", 33) << std::endl;
+        std::cout << printColor("[3] EXIT", 31) << std::endl;
+        std::cout << std::endl;
         char select = getch();
-        if (!(select < '1' || select > '4'))
+        if (!(select < '1' || select > '3'))
         {
             choice = select;
             break;
@@ -205,16 +189,13 @@ void Roulette::Menu(){
 }
 void Roulette::gotoMenu(char choice){
     switch(choice){
-        case '1': 
-            RegisterMenu();
-            break;
-        case '2':
+        case '1':
             Play();
             break;
-        case '3':
+        case '2':
             Rules("main");
             break;
-        case '4':
+        case '3':
             exitMenu();
             break;
     }
@@ -235,7 +216,7 @@ void Roulette::exitMenu(){
             std::cout << endl;
             if (select == '1')
             {
-                exit(0);
+                RegisterMenu();
             }
             else
             {
@@ -253,7 +234,7 @@ void Roulette::Rules(string located){
     std::cout<<"\nFor the normal spot , everything will be normal";
     std::cout<<"\nEach round , choose the spot with the number you want and the roulette will start";
     std::cout<<"\nAfter the roulette finish spin , if your spot have the same number with the spot where the ball stop on roulette spin , you win the bet";
-    std::cout<<"\nThe minimum for the bet is 100$ , and the maximum is 10000000$";
+    std::cout<<"\nThe minimum for the bet is 20$ , and the maximum is 100000$";
     std::cout<<"\n";
     std::cout<<"\nGood luck !";
 
@@ -261,11 +242,11 @@ void Roulette::Rules(string located){
     // GO TO MAIN MENU
     if (located == "main")
     {
-        Menu();
+        RegisterMenu();
     }
 }
 
-
+//save player data
 void Roulette::saveInformation(){
     std::string name;
     double money;
@@ -326,7 +307,6 @@ void Roulette::saveInformation(){
             }
         }
     }
-
 void Roulette::printInformation(string name, bool saved){
     double money;
     clearSystem();
@@ -354,7 +334,7 @@ void Roulette::printInformation(string name, bool saved){
     }
 }
 
-
+//roulette table
 void Roulette::rouletteTable(int num, bool isResult){
     int colorBorder = 35;
     int colorValueDefault = 37;
@@ -408,7 +388,6 @@ void Roulette::rouletteTable(int num, bool isResult){
 
             if (j == 0)
             {
-
                 std::cout << printColor("|| ", colorBorder) << printColor(value, highLights[i][j].getValue()) << printColor(" |", colorBorder);
                 continue;
             }
@@ -417,7 +396,7 @@ void Roulette::rouletteTable(int num, bool isResult){
                 std::cout
                     << " " << printColor(value, highLights[i][j].getValue()) << printColor(" ||", colorBorder);
             }
-            else if (j == 2 || j == 5)
+            else if (j == 3 || j == 7 || j == 11)
             {
                 std::cout << " " << printColor(value, highLights[i][j].getValue()) << printColor(" ||", colorBorder);
             }
@@ -429,7 +408,7 @@ void Roulette::rouletteTable(int num, bool isResult){
         if (h % 3 == 0)
         {
             std::cout << std::endl;
-            std::cout << printColor("===========================================", colorBorder) << endl;
+            std::cout << printColor("===========================================", colorBorder) << std::endl;
         }
         else
         {
@@ -447,7 +426,6 @@ void Roulette::creatTable(){
     // Create a row for every pointer
     for (int i = 0; i < N; i++)
     {
-
         // Note : Rows may not be contiguous
         grid[i] = new Square[N];
         normalgrid[i] = new Square[N];
@@ -481,7 +459,6 @@ void Roulette::fillDiagonal(){
 
     for (int i = 0; i < N; i = i + sqrtN)
     {
-
         // for diagonal box, start coordinates->i==j
         fillTable(i, i);
     }
@@ -491,40 +468,14 @@ void Roulette::fillTable(int row, int col){
     int num;
     for(int i = 0; i<sqrtN; i++){
         for(int j = 0; j<sqrtN; j++){
-            num = RandomNumber(N);
             grid[row+i][col+j] = num;
+            num++;
         }
     }
 }
 
-
+//main game part
 void Roulette::Play(){
-    char setLevel = table();
-    // CONDITION LEVEL
-    if (setLevel == '4')
-    {
-        // GO TO MENU
-        Menu();
-    }
-    else
-    {
-        // GAME START
-        level = (int)setLevel - 48; // Initialize Level
-
-        // Random level
-
-        if (level == 1)
-        {
-            this->nums = 30;
-        }
-        else if (level == 2)
-        {
-            this->nums = 40;
-        }
-        else if (level == 3)
-        {
-            this->nums = 50;
-        }
 
         pointerX = 0; // RESET POINTER
         pointerY = 0; // RESET POINTER
@@ -534,55 +485,173 @@ void Roulette::Play(){
         timePlay->StartGame();
 
         mainGame(0);
-    }
-
-    // PAUSE
-    getch();
-
-    // // GO TO MAIN MENU
-    // menu();
 }
-char Roulette::table(){
-    char choice;
-    do{
-        clearSystem();
-        std::cout << printColor("=========================================", 37) << std::endl;
-        std::cout << setw(35) << right << printColor("ROULETTE", 36) << std::endl;
-        std::cout << printColor("=========================================", 37) << std::endl;
-
-        std::cout << setw(10) << right << "" << printColor("SELECT TABLE", 34) << std::endl;
-        std::cout << printColor("[1] SMALL", 32) << std::endl;
-        std::cout << printColor("[2] MEDIUM", 33) << std::endl;
-        std::cout << printColor("[3] LARGE", 31) << std::endl;
-        std::cout << printColor("[4] BACK", 35) << std::endl; // BACK TO MENU
-        std::cout << std::endl;
-        std::cout << printColor(" Press the number of your choice! ", 37) << std::endl;
-
-        // GET USER CHOICE
-        char select = getch();
-        if (!(select < '1' || select > '4'))
-        {
-            choice = select;
-            break;
-        }
-        else if ((int)select == 27)
-        {
-            choice = '4';
-            break;
-        }
-    } while (true);
-
-    return choice;
+void Roulette::Bet(){
+    int bet, deposit;
+    std::cout << "Enter your bet: ";
+    std::cin >> bet;
+    if(){
+        deposit += bet*2;
+    }
+    else
+        deposit -= bet*2;
 }
 void Roulette::mainGame(int N){
     clearSystem();
     std::cout << printColor("=========================================", 37) << std::endl;
-    std::cout << setw(35) << right << printColor("ROULETTE", 36) << endl;
+    std::cout << setw(35) << right << printColor("ROULETTE", 36) << std::endl;
     std::cout << printColor("=========================================", 37) << std::endl;
     std::cout << std::endl;
+
+
+    //movement
+    while (true)
+    {
+        int firstKey = getch();
+        if (PLATFORM_NAME == "windows")
+        {
+
+            int key = firstKey;
+
+            if (key == 112 || key == 27)
+            {
+                pauseKey();
+            }
+            else
+            {
+                if (incorrect > 0 && correct < N * N)
+                {
+                    // Get 1 - > 233
+                    if (!(key <= 0 || key >= 224))
+                    {
+                        if (key == 8 || key == 83)
+                        {
+                            if (grid[pointerX][pointerY] !=
+                                normalgrid[pointerX][pointerY])
+                            {
+                                backSpaceKey();
+                                mainGame(0);
+                            }
+                        }
+                        else if (key == 75 || key == 68 || key == 97)
+                        {
+                            leftKey();
+                            mainGame(0);
+                        }
+                        else if (key == 72 || key == 65 || key == 119)
+                        {
+                            upKey();
+                            mainGame(0);
+                        }
+                        else if (key == 80 || key == 66 || key == 115)
+                        {
+                            downKey();
+                            mainGame(0);
+                        }
+                        else if (key == 77 || key == 67 || key == 100)
+                        {
+                            rightKey();
+                            mainGame(0);
+                        }
+                        else if (grid[pointerX][pointerY] !=
+                                     normalgrid[pointerX][pointerY] &&
+                                 key - 48 > 0 && key - 48 < 10)
+                        {
+                            mainGame(key - 48);
+                        }
+                    }
+                }
+                else if (correct == N * N)
+                {
+                    if (key == 13)
+                    {
+                        saveInformation();
+                    }
+                }
+            }
+        }
+        else
+        {
+            int key = firstKey;
+            int second;
+            if (firstKey == 27)
+            {
+                second = getch();
+                if (second == 91)
+                {
+                    key = getch();
+                }
+                else
+                {
+                    key = firstKey;
+                    if (key == 27)
+                    {
+                        pauseKey();
+                    }
+                }
+            }
+            if (key == 112)
+            {
+                pauseKey();
+            }
+            else
+            {
+                if (incorrect > 0 && correct < N * N)
+                {
+                    // Get 1 - > 233
+                    if (!(key <= 0 || key >= 224))
+                    {
+
+                        if (key == 8 || key == 83)
+                        {
+                            if (grid[pointerX][pointerY] !=
+                                normalgrid[pointerX][pointerY])
+                            {
+                                backSpaceKey();
+                                mainGame(0);
+                            }
+                        }
+                        else if (key == 75 || key == 68 || key == 97)
+                        {
+                            leftKey();
+                            mainGame(0);
+                        }
+                        else if (key == 72 || key == 65 || key == 119)
+                        {
+                            upKey();
+                            mainGame(0);
+                        }
+                        else if (key == 80 || key == 66 || key == 115)
+                        {
+                            downKey();
+                            mainGame(0);
+                        }
+                        else if (key == 77 || key == 67 || key == 100)
+                        {
+                            rightKey();
+                            mainGame(0);
+                        }
+                        else if (grid[pointerX][pointerY] !=
+                                     normalgrid[pointerX][pointerY] &&
+                                 key - 48 > 0 && key - 48 < 10)
+                        {
+                            mainGame(key - 48);
+                        }
+                    }
+                }
+                else if (correct == N * N)
+                {
+                    if (key == 13)
+                    {
+                        saveInformation();
+                    }
+                }
+            }
+        }
+    }
 }
 
-
+//movement key
 void Roulette::upKey()
 {
     if (pointerX == 0)
@@ -704,7 +773,6 @@ void Roulette::pauseKey()
         }
     }
 }
-
 void Roulette::backSpaceKey()
 {
     grid[pointerX][pointerY] = 0;
